@@ -550,6 +550,7 @@ typedef SWIFT_ENUM(NSInteger, SKPaymentPlatform, open) {
 
 @protocol SKXPaymentTransactionObserver;
 @class SKXPaymentTransaction;
+@class SKXRestorationError;
 @class NSURL;
 @class XMTokenPayment;
 /// Manages a queue of payments and transactions in the Xsolla Mobile SDK.
@@ -601,6 +602,10 @@ SWIFT_CLASS_NAMED("SKPaymentQueue")
 /// Restores completed transactions.
 /// This allows users to restore previously purchased non-consumable products.
 - (void)restoreCompletedTransactions;
+/// Restores unfinished purchases by loading the user’s inventory or events.
+/// The completion handler receives <code>nil</code> on success, or an <code>SKXRestorationError</code> describing the failure.
+/// Restored transactions will be delivered to observers via <code>paymentQueue(_:updatedTransactions:)</code>.
+- (void)restoreUnfinishedPurchasesWithCompletion:(void (^ _Nonnull)(SKXRestorationError * _Nullable))completion;
 /// Always returns true. Compatibility method.
 /// Checks if payments can be made.
 ///
@@ -1124,10 +1129,34 @@ SWIFT_CLASS_NAMED("SKProductsResponse")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Error codes for purchase restoration failures.
+typedef SWIFT_ENUM(NSInteger, SKRestorationError, open) {
+/// The SDK has not been configured or local purchase restoration is disabled.
+  SKRestorationErrorNotConfigured = 0,
+/// A purchase is currently in progress.
+  SKRestorationErrorPurchaseInProgress = 1,
+/// Another restoration or events poll is already in progress.
+  SKRestorationErrorAlreadyInProgress = 2,
+/// There are unfinished transactions that must be completed first.
+  SKRestorationErrorPendingTransactions = 3,
+/// The network request to load purchases failed.
+  SKRestorationErrorRequestFailed = 4,
+};
+
 /// Represents an error in the Xsolla Mobile SDK.
 /// This class extends NSError to provide specific error codes and information.
 SWIFT_CLASS("_TtC15XsollaMobileSDK8SKXError")
 @interface SKXError : NSError
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@property (nonatomic, readonly, copy) NSString * _Nonnull localizedDescription;
+- (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
+@end
+
+/// Represents a restoration error in the Xsolla Mobile SDK.
+/// This class extends NSError to provide specific restoration error codes and information.
+SWIFT_CLASS("_TtC15XsollaMobileSDK19SKXRestorationError")
+@interface SKXRestorationError : NSError
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @property (nonatomic, readonly, copy) NSString * _Nonnull localizedDescription;
@@ -1749,6 +1778,7 @@ typedef SWIFT_ENUM(NSInteger, SKPaymentPlatform, open) {
 
 @protocol SKXPaymentTransactionObserver;
 @class SKXPaymentTransaction;
+@class SKXRestorationError;
 @class NSURL;
 @class XMTokenPayment;
 /// Manages a queue of payments and transactions in the Xsolla Mobile SDK.
@@ -1800,6 +1830,10 @@ SWIFT_CLASS_NAMED("SKPaymentQueue")
 /// Restores completed transactions.
 /// This allows users to restore previously purchased non-consumable products.
 - (void)restoreCompletedTransactions;
+/// Restores unfinished purchases by loading the user’s inventory or events.
+/// The completion handler receives <code>nil</code> on success, or an <code>SKXRestorationError</code> describing the failure.
+/// Restored transactions will be delivered to observers via <code>paymentQueue(_:updatedTransactions:)</code>.
+- (void)restoreUnfinishedPurchasesWithCompletion:(void (^ _Nonnull)(SKXRestorationError * _Nullable))completion;
 /// Always returns true. Compatibility method.
 /// Checks if payments can be made.
 ///
@@ -2323,10 +2357,34 @@ SWIFT_CLASS_NAMED("SKProductsResponse")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Error codes for purchase restoration failures.
+typedef SWIFT_ENUM(NSInteger, SKRestorationError, open) {
+/// The SDK has not been configured or local purchase restoration is disabled.
+  SKRestorationErrorNotConfigured = 0,
+/// A purchase is currently in progress.
+  SKRestorationErrorPurchaseInProgress = 1,
+/// Another restoration or events poll is already in progress.
+  SKRestorationErrorAlreadyInProgress = 2,
+/// There are unfinished transactions that must be completed first.
+  SKRestorationErrorPendingTransactions = 3,
+/// The network request to load purchases failed.
+  SKRestorationErrorRequestFailed = 4,
+};
+
 /// Represents an error in the Xsolla Mobile SDK.
 /// This class extends NSError to provide specific error codes and information.
 SWIFT_CLASS("_TtC15XsollaMobileSDK8SKXError")
 @interface SKXError : NSError
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@property (nonatomic, readonly, copy) NSString * _Nonnull localizedDescription;
+- (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
+@end
+
+/// Represents a restoration error in the Xsolla Mobile SDK.
+/// This class extends NSError to provide specific restoration error codes and information.
+SWIFT_CLASS("_TtC15XsollaMobileSDK19SKXRestorationError")
+@interface SKXRestorationError : NSError
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @property (nonatomic, readonly, copy) NSString * _Nonnull localizedDescription;
