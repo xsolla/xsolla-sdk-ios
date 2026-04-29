@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.9.1] - 2026-04-29
+
+### Fixed
+
+- Prevent `EXC_BAD_ACCESS` in `loadMarketplaceId` when the host iOS app is run on macOS via "Designed for iPad".
+- Restoring purchases will ignore pending failed transactions.
+
 ## [3.9.0] - 2026-04-02
 
 ### Added
