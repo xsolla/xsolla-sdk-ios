@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.9.2] - 2026-04-30
+
+### Fixed
+
+- Briefly backgrounding the app during an in-app Pay Station purchase no longer cancels the transaction prematurely.
+
 ## [3.9.1] - 2026-04-29
 
 ### Fixed
