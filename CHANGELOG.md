@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.9.3] - 2026-05-22
+
+### Fixed
+
+- In-app Safari View Controller purchases no longer hang after Pay Station redirects back.
+- Concurrent rechecks of the same transaction (e.g. deep link + foreground, SFVC cancel + foreground) are de-duplicated; only one network call runs and only one terminal `success`/`fail` is delivered to observers.
+
 ## [3.9.2] - 2026-04-30
 
 ### Fixed

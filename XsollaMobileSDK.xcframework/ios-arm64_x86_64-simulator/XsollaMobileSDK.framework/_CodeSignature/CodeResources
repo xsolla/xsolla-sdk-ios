@@ -18,55 +18,55 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		KMVb3yEvGFsQvuon9FHfJEV8dD0=
+		PoO9qYnPt9MmMB5BXZBDBgAETJ4=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		gIlwizPS0hWO3h8brBvqu84n1BE=
+		L8GoJlkGSMXmk4Ioy6ze5iVqiKA=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		pc6imMriGfdAHC1xuLZ1nBnN4z4=
+		LYKGRTCBOFfZuIXDuTZlxhO0lbg=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		BiL5JtjK6Zv8QGXEmKxAlLXim80=
+		72nK3sbMmIUNCQ+wkG23nxj2Cl4=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		G4d56zekf01h2JxY6bUAOgNWXPI=
+		BVYh6+HswBzR8IoXpau4aS6aOW0=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		g2WNyhAciMHLSQzjH1LfEf5+fms=
+		5qRccpeIYYUMqF0CBL/PRizKSPQ=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		nPHcrbR/KPTOQeX8gy5niunWRmA=
+		J/TMiaG0nAbUAcyz+SCOAJVVh60=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		s5v95u94IiHL/7o7A6Hr0/0f3Tc=
+		zVHsAXXIXgr91PoPR5s4tkemK8k=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		BiL5JtjK6Zv8QGXEmKxAlLXim80=
+		72nK3sbMmIUNCQ+wkG23nxj2Cl4=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		ub+qRkgnhPLuAbgodBcQPd7sAEk=
+		lMWAeu1jXSwViaCu8DUohEo+m2M=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		t28zyCmsJX2yFyGt57bNzhBFOIo=
+		8YrYRCxsRAyh46IJX9e4tSdlEp4=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ytFe5RqzXnR5jxVWyJDm/H+QuMw=
+		ttjv1Tanxul5U8HGr4FIz+TgDUA=
 		</data>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		iGmarTapz89hFvSPcw96kt4yluM=
+		olwWjfUlCSNIo5COhgefLteLByE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -104,84 +104,84 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WO2XBi5zJbSqhrFKS5LIDhtmeaIKBaG9xheb4Z8/HTc=
+			gzBqz+CBfRB0bh/ikBnRfTgXKN7LtAK71KTWqy5nkPo=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			S6PLwvM8Z+47I0bkmOQlpa1Rvz6PIZeqQshUbB6RMe8=
+			caNpUL2gS2q5EnI52qNFDZRkuHOxQYSnuMt4SeWx9eo=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			e67jTbFVUkpQkwkg5xgIQ+IVpw32aTTOKq2h8D5a2eY=
+			BywSk3UnTY59bpNx5ReMjTIftyB6o5ma+qZdojNR2ng=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5nNpmiTToRxauOxYWUk8AgwtuCxN5jeY1OECU3y/lhQ=
+			8oZxOrg7DGIEinm8FaiZ34OgOsMMQJVhn/rOjMKLvwU=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1s2CYBzM7pCIb0Yx5/AeSqgwVjRtA+gAPF8CqZ6r2HE=
+			iMkg9H+7mHQdbyCh1cZrOaH0N6BykxnETLciaCYH6PQ=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HEOIDkqzmDRyvKIpixYs/LgHFaJHO3bDD8tF7KPupAQ=
+			8nQ/46gb+RcLDIspj7YGIdQWlqeKxWRlCevLLbh/rgI=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fzQ5d6h0vUg3D/CFGuQNal9nFtFZPESZBV7UbFsGK2c=
+			Aq3piQjwz/jfr2/4o22sfzoczPzUwckYmS0uycUTc7c=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			e67jTbFVUkpQkwkg5xgIQ+IVpw32aTTOKq2h8D5a2eY=
+			BywSk3UnTY59bpNx5ReMjTIftyB6o5ma+qZdojNR2ng=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			apwcGaCchMbjGeRguwtH0rSCPFCzT101ZEpsYnwBmxQ=
+			jhZObP55h5Ogkj3GgS6OzKxfpwfAl2pMMCR3vqO/fb4=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			n4HYM1CehDmEwqYv0z4YhCPaaTq0mKyAvz3P3+18ht8=
+			xj2cULDQWb5nC/v2G9ytCvFlGnHCGfvnxXBTXbyz3c0=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Spx3mGJcv5RMbA5RIRpQx9yKjb/rLOZrwxX3sCTpgpI=
+			mp9LJfPM3N0ZKxZ6x2ijGU0QNqGBlmP0LAd6SpQ13cY=
 			</data>
 		</dict>
 		<key>Modules/XsollaMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2CQiBjNtGnADd7x0WI6C8ejltuB5NbArIPHWIOPUOk8=
+			7IfmNpbiNHI0pOvyw37TZnKC5V9oW+yUwEDIR6txfF4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
