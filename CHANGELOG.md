@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.9.4] - 2026-05-25
+
+### Fixed
+
+- Backgrounding the app during an in-app Pay Station purchase no longer cancels the transaction in portrait-only apps.
+
 ## [3.9.3] - 2026-05-22
 
 ### Fixed
