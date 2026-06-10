@@ -1,38 +1,25 @@
 # Xsolla Mobile SDK for iOS
 
+[![License](https://img.shields.io/github/license/xsolla/xsolla-sdk-ios)](./LICENSE)
 [![Swift 5+](https://img.shields.io/badge/Swift-5+-orange.svg)](https://swift.org)
 [![iOS 12+](https://img.shields.io/badge/iOS-12%2B-blue.svg)](https://developer.apple.com)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 
-Pre-built iOS SDK for integrating in-game payments into your app via Xsolla Pay Station.
-
-## SDK Explorer
-
-See exactly how payments work before writing a single line of code. The SDK Explorer lets you walk through authentication, catalog loading, purchasing, and finalization — all in an interactive environment.
-
-[![SDK Explorer — interactive demo of Xsolla Mobile SDK payment flow](readme-assets/explorer.png)](https://developers.xsolla.com/sdk/demo/)
-
-[**Integrate Now →**](https://developers.xsolla.com/sdk/demo/)
-
-## Essential Links
-
-- [SDK Explorer](https://developers.xsolla.com/sdk/demo/) — interactive demo
-- [SDK Documentation](https://developers.xsolla.com/sdk/) — full integration guide
-- [Demo App](https://github.com/xsolla/xsolla-sdk-demo) — sample project
-
 ## Overview
 
-Xsolla Mobile SDK provides a StoreKit-compatible API for in-game purchases via Xsolla Pay Station. It mirrors Apple's StoreKit patterns (`SKPaymentQueue`, `SKProduct`, `SKPaymentTransaction`) so integration feels familiar to iOS developers.
+Xsolla Mobile SDK for iOS is a pre-built SDK for integrating in-game payments into your app via Xsolla Pay Station. It provides a StoreKit-compatible API (`SKPaymentQueue`, `SKProduct`, `SKPaymentTransaction`) so integration feels familiar to iOS developers.
 
 **Key features:**
 
 - 1000+ payment methods across 200+ geographies
-- 130+ currencies including local and alternative payment methods
+- 130+ currencies, including local and alternative payment methods
 - Built-in anti-fraud protection
-- 25+ languages supported out of the box
+- 25+ languages out of the box
 - Player authentication (Xsolla Login widget, social login, custom tokens)
 - Product catalog and virtual items
 - Buy Button and Web Shop integration
+
+Try the [interactive SDK Explorer](https://developers.xsolla.com/sdk/demo/) to see the payment flow before writing code.
 
 ## Requirements
 
@@ -40,21 +27,15 @@ Xsolla Mobile SDK provides a StoreKit-compatible API for in-game purchases via X
 - Xcode 16.4+
 - Swift 5.9+
 
-## Installation
+## Install
 
 ### Swift Package Manager (Xcode)
 
-1. In Xcode, go to **File > Add Package Dependencies...**
-2. Enter the repository URL:
-   ```
-   https://github.com/xsolla/xsolla-sdk-ios.git
-   ```
-3. Select the version rule (e.g., **Up to Next Major Version**)
-4. Click **Add Package**
+1. In Xcode: **File > Add Package Dependencies...**
+2. Enter the repository URL: `https://github.com/xsolla/xsolla-sdk-ios.git`
+3. Select a version rule (e.g. **Up to Next Major Version**) and click **Add Package**
 
 ### Swift Package Manager (Package.swift)
-
-Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
@@ -62,7 +43,7 @@ dependencies: [
 ]
 ```
 
-Then add `"XsollaMobileSDK"` to your target's dependencies:
+Then add the product to your target:
 
 ```swift
 .target(
@@ -73,74 +54,45 @@ Then add `"XsollaMobileSDK"` to your target's dependencies:
 )
 ```
 
-## Quick Start
-
-### 1. Authenticate
-
-Configure the SDK with your project credentials, start the payment queue, and register a transaction observer:
+## Usage
 
 ```swift
 import XsollaMobileSDK
 
+// 1. Authenticate — configure, start the queue, register an observer
 let settings = SKPaymentSettings(projectId: 301871,
                                  loginProjectId: "dfcb133b-6d0b-4937-b8d2-c4f4d58fb53a")
-
 settings.useSandbox = true
-settings.openExternalBrowser = true
-
 SKPaymentQueue.default().start(settings)
-SKPaymentQueue.default().add(self) // conforms to SKPaymentTransactionObserver
-```
+SKPaymentQueue.default().add(self) // SKPaymentTransactionObserver
 
-### 2. Load Catalog
-
-Query your product catalog by SKU:
-
-```swift
-let skus: Set<String> = ["ticket.10", "ticket.20", "ticket.30", "pack.starter", "pack.premium", "pack.vip", "money.100", "money.200", "money.300"]
-let request = SKProductsRequest(productIdentifiers: skus)
+// 2. Load catalog by SKU
+let request = SKProductsRequest(productIdentifiers: ["ticket.10", "pack.starter"])
 request.delegate = self
 request.start()
 
-// Conform to SKProductsRequestDelegate
-extension YourClass: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        self.products = response.products
-    }
-}
-```
-
-### 3. Purchase
-
-Use the product from your catalog to launch a purchase via Pay Station:
-
-```swift
-let product = products.first!
-let payment = SKPayment(product: product)
+// 3. Purchase
+let payment = SKPayment(product: products.first!)
 SKPaymentQueue.default().add(payment)
+
+// 4. Finalize completed transactions in your observer, then:
+SKPaymentQueue.default().finishTransaction(transaction)
 ```
 
-### 4. Finalize
+See the [SDK Documentation](https://developers.xsolla.com/sdk/) for the full integration guide.
 
-Handle completed transactions in your `SKPaymentTransactionObserver` and finish each one:
+## Documentation
 
-```swift
-extension YourClass: SKPaymentTransactionObserver {
-    func paymentQueue(_: SKPaymentQueue, updatedTransactions: [SKPaymentTransaction]) {
-        for transaction in updatedTransactions {
-            switch transaction.transactionState {
-            case .purchased:
-                // Award the product to the user
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .failed:
-                // Handle error
-                SKPaymentQueue.default().finishTransaction(transaction)
-            default:
-                break
-            }
-        }
-    }
-}
-```
+- [SDK Documentation](https://developers.xsolla.com/sdk/) — full integration guide
+- [SDK Explorer](https://developers.xsolla.com/sdk/demo/) — interactive demo
+- [Demo App](https://github.com/xsolla/xsolla-sdk-demo) — sample project
 
-> For the full integration guide, see the [SDK Documentation](https://developers.xsolla.com/sdk/).
+## Support
+
+- **GitHub Issues:** [github.com/xsolla/xsolla-sdk-ios/issues](https://github.com/xsolla/xsolla-sdk-ios/issues)
+- **Integration team:** integration@xsolla.com
+- **Developer portal:** [developers.xsolla.com](https://developers.xsolla.com)
+
+## License
+
+Apache License 2.0. See [LICENSE](./LICENSE).
