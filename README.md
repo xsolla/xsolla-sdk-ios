@@ -1,5 +1,7 @@
 # Xsolla Mobile SDK for iOS
 
+![License](https://img.shields.io/github/license/xsolla/xsolla-sdk-ios)
+![Latest release](https://img.shields.io/github/v/release/xsolla/xsolla-sdk-ios)
 [![Swift 5+](https://img.shields.io/badge/Swift-5+-orange.svg)](https://swift.org)
 [![iOS 12+](https://img.shields.io/badge/iOS-12%2B-blue.svg)](https://developer.apple.com)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
@@ -144,3 +146,12 @@ extension YourClass: SKPaymentTransactionObserver {
 ```
 
 > For the full integration guide, see the [SDK Documentation](https://developers.xsolla.com/sdk/).
+
+## Support
+
+- **GitHub Issues:** [github.com/xsolla/xsolla-sdk-ios/issues](https://github.com/xsolla/xsolla-sdk-ios/issues)
+- **Developer portal:** [developers.xsolla.com](https://developers.xsolla.com)
+
+## License
+
+Apache 2.0 License. See [LICENSE](./LICENSE).
