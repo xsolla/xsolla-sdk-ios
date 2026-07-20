@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.10.0] - 2026-07-20
+
+### Changed
+
+- Product loading is now faster for projects with large catalogs.
+- Improved error descriptions in logs for failed transactions.
+
+### Fixed
+
+- Pay Station now opens correctly when a screen is already presenting another view.
+
 ## [3.9.4] - 2026-05-25
 
 ### Fixed
