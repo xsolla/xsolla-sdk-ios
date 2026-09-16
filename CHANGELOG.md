@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.11.0] - 2026-09-16
+
+### Changed
+
+- A restored purchase now reports the number of units the player holds in `SKPayment.quantity`, instead of always reporting a single unit.
+- `SKPaymentTransaction.transactionDate` is now set when a purchase completes. It was previously never populated.
+- Restored purchases now set `SKPaymentTransaction.original` to the purchase being replayed, so a restore can be told apart from a purchase made just now. As in StoreKit, the restore is dated when it is delivered, while `original` carries the date the player paid, along with the order's identifiers. A restore from the player's inventory reports neither, as the inventory records no purchase history.
+
 ## [3.10.0] - 2026-07-20
 
 ### Changed

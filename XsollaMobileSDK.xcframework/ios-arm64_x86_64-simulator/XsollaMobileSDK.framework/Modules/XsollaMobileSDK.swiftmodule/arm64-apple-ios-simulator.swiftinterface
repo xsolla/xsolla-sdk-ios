@@ -14,6 +14,90 @@ import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @objc(SKXProductsResponse) @objcMembers public class SKProductsResponse : ObjectiveC.NSObject {
+  @objc public var products: [XsollaMobileSDK.SKProduct] {
+    get
+  }
+  @objc public var invalidProductIdentifiers: [Swift.String] {
+    get
+  }
+  @objc deinit
+}
+@objc(SKXPayment) @objcMembers public class SKPayment : ObjectiveC.NSObject {
+  @objc public var productIdentifier: Swift.String {
+    @objc get
+  }
+  @objc public var quantity: Swift.Int {
+    get
+  }
+  @objc public var requestData: Foundation.Data? {
+    @objc get
+  }
+  @objc public var applicationUsername: Swift.String? {
+    @objc get
+  }
+  @objc public var customPayload: Swift.String?
+  @objc public var externalIdentifier: Swift.String?
+  public var paymentMethod: Swift.Int?
+  @objc public var paymentMethodId: Foundation.NSNumber? {
+    @objc get
+    @objc set
+  }
+  @objc required public init(product: XsollaMobileSDK.SKProduct)
+  @objc(paymentWithProduct:) public class func payment(with product: XsollaMobileSDK.SKProduct) -> Self
+  @objc deinit
+}
+@objc(XMTokenPayment) @objcMembers public class TokenPayment : ObjectiveC.NSObject {
+  @objc final public let paystationToken: Swift.String
+  public var isSandbox: Swift.Bool?
+  public var projectId: Swift.Int?
+  @objc @available(*, deprecated, message: "Deprecated")
+  public var allowFinishedWithoutOrderId: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  public init(_ paystationToken: Swift.String, isSandbox: Swift.Bool? = nil)
+  @objc(initWithPaystationToken:) convenience public init(paystationToken: Swift.String)
+  @objc(initWithPaystationToken:isSandbox:) convenience public init(paystationToken: Swift.String, isSandbox: Swift.Bool)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(SKXRequest) public class SKRequest : ObjectiveC.NSObject {
+  @objc(start) public func start()
+  @objc(cancel) public func cancel()
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(SKXPaymentQueue) @objcMembers public class SKPaymentQueue : ObjectiveC.NSObject {
+  @objc public var transactionObservers: [any XsollaMobileSDK.SKPaymentTransactionObserver] {
+    @objc get
+  }
+  @objc public var transactions: [XsollaMobileSDK.SKPaymentTransaction] {
+    @objc get
+  }
+  @objc(defaultQueue) public class func `default`() -> XsollaMobileSDK.SKPaymentQueue
+  @objc(startWithSettings:) public func start(_ settings: XsollaMobileSDK.SKPaymentSettings)
+  @objc(addTransactionObserver:) public func add(_ observer: any XsollaMobileSDK.SKPaymentTransactionObserver)
+  @objc(removeTransactionObserver:) public func remove(_ observer: any XsollaMobileSDK.SKPaymentTransactionObserver)
+  @objc(addPayment:) public func add(_ payment: XsollaMobileSDK.SKPayment)
+  @objc(finishTransaction:) public func finishTransaction(_ transaction: XsollaMobileSDK.SKPaymentTransaction)
+  @objc(cancelTransaction) public func cancelTransaction() -> Swift.Bool
+  @objc public func restoreCompletedTransactions()
+  @objc(restoreUnfinishedPurchasesWithCompletion:) public func restoreUnfinishedPurchases(completion: @escaping (XsollaMobileSDK.SKXRestorationError?) -> Swift.Void)
+  @objc public class func canMakePayments() -> Swift.Bool
+  @objc public func setupEngineAnalytics(for engine: Swift.String, version: Swift.String)
+  @objc public class func checkIfRunningInAlternativeDistribution(completion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc public class func loadCurrentStorefrontCountryCode(completion: @escaping (Swift.String?) -> Swift.Void)
+  @objc public func validateTransaction(_ transaction: XsollaMobileSDK.SKPaymentTransaction, completion: @escaping (Swift.Bool, (any Swift.Error)?) -> Swift.Void)
+  @objc public func open(url: Foundation.URL) -> Swift.Bool
+  @objc public func supportedInterfaceOrientationsFor(window: UIKit.UIWindow?) -> UIKit.UIInterfaceOrientationMask
+  @objc public var currentLoginToken: Swift.String? {
+    @objc get
+  }
+  @objc(purchaseWithPaystationToken:isSandbox:) public func purchase(withPaystationToken token: Swift.String, isSandbox: Swift.Bool)
+  @objc(purchaseWithTokenPayment:) public func purchase(with payment: XsollaMobileSDK.TokenPayment)
+  @objc(purchaseWithSKU:) public func purchase(withSKU sku: Swift.String) -> Swift.Bool
+  @objc deinit
+}
 @objc(SKXRequestDelegate) public protocol SKRequestDelegate {
   @objc optional func requestDidFinish(_ request: XsollaMobileSDK.SKRequest)
   @objc optional func request(_ request: XsollaMobileSDK.SKRequest, didFailWithError error: any Swift.Error)
@@ -484,90 +568,6 @@ public struct AccessTokenInfo : Swift.Codable {
   @objc final public let tokenType: Swift.String
   @objc public init(accessToken: Swift.String, expiresIn: Foundation.Date? = nil, refreshToken: Swift.String? = nil, tokenType: Swift.String)
   @objc public func toJsonString() -> Swift.String?
-  @objc deinit
-}
-@_hasMissingDesignatedInitializers @objc(SKXProductsResponse) @objcMembers public class SKProductsResponse : ObjectiveC.NSObject {
-  @objc public var products: [XsollaMobileSDK.SKProduct] {
-    get
-  }
-  @objc public var invalidProductIdentifiers: [Swift.String] {
-    get
-  }
-  @objc deinit
-}
-@objc(SKXPayment) @objcMembers public class SKPayment : ObjectiveC.NSObject {
-  @objc public var productIdentifier: Swift.String {
-    @objc get
-  }
-  @objc public var quantity: Swift.Int {
-    @objc get
-  }
-  @objc public var requestData: Foundation.Data? {
-    @objc get
-  }
-  @objc public var applicationUsername: Swift.String? {
-    @objc get
-  }
-  @objc public var customPayload: Swift.String?
-  @objc public var externalIdentifier: Swift.String?
-  public var paymentMethod: Swift.Int?
-  @objc public var paymentMethodId: Foundation.NSNumber? {
-    @objc get
-    @objc set
-  }
-  @objc required public init(product: XsollaMobileSDK.SKProduct)
-  @objc(paymentWithProduct:) public class func payment(with product: XsollaMobileSDK.SKProduct) -> Self
-  @objc deinit
-}
-@objc(XMTokenPayment) @objcMembers public class TokenPayment : ObjectiveC.NSObject {
-  @objc final public let paystationToken: Swift.String
-  public var isSandbox: Swift.Bool?
-  public var projectId: Swift.Int?
-  @objc @available(*, deprecated, message: "Deprecated")
-  public var allowFinishedWithoutOrderId: Swift.Bool {
-    @objc get
-    @objc set
-  }
-  public init(_ paystationToken: Swift.String, isSandbox: Swift.Bool? = nil)
-  @objc(initWithPaystationToken:) convenience public init(paystationToken: Swift.String)
-  @objc(initWithPaystationToken:isSandbox:) convenience public init(paystationToken: Swift.String, isSandbox: Swift.Bool)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc(SKXRequest) public class SKRequest : ObjectiveC.NSObject {
-  @objc(start) public func start()
-  @objc(cancel) public func cancel()
-  @objc override dynamic public init()
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(SKXPaymentQueue) @objcMembers public class SKPaymentQueue : ObjectiveC.NSObject {
-  @objc public var transactionObservers: [any XsollaMobileSDK.SKPaymentTransactionObserver] {
-    @objc get
-  }
-  @objc public var transactions: [XsollaMobileSDK.SKPaymentTransaction] {
-    @objc get
-  }
-  @objc(defaultQueue) public class func `default`() -> XsollaMobileSDK.SKPaymentQueue
-  @objc(startWithSettings:) public func start(_ settings: XsollaMobileSDK.SKPaymentSettings)
-  @objc(addTransactionObserver:) public func add(_ observer: any XsollaMobileSDK.SKPaymentTransactionObserver)
-  @objc(removeTransactionObserver:) public func remove(_ observer: any XsollaMobileSDK.SKPaymentTransactionObserver)
-  @objc(addPayment:) public func add(_ payment: XsollaMobileSDK.SKPayment)
-  @objc(finishTransaction:) public func finishTransaction(_ transaction: XsollaMobileSDK.SKPaymentTransaction)
-  @objc(cancelTransaction) public func cancelTransaction() -> Swift.Bool
-  @objc public func restoreCompletedTransactions()
-  @objc(restoreUnfinishedPurchasesWithCompletion:) public func restoreUnfinishedPurchases(completion: @escaping (XsollaMobileSDK.SKXRestorationError?) -> Swift.Void)
-  @objc public class func canMakePayments() -> Swift.Bool
-  @objc public func setupEngineAnalytics(for engine: Swift.String, version: Swift.String)
-  @objc public class func checkIfRunningInAlternativeDistribution(completion: @escaping (Swift.Bool) -> Swift.Void)
-  @objc public class func loadCurrentStorefrontCountryCode(completion: @escaping (Swift.String?) -> Swift.Void)
-  @objc public func validateTransaction(_ transaction: XsollaMobileSDK.SKPaymentTransaction, completion: @escaping (Swift.Bool, (any Swift.Error)?) -> Swift.Void)
-  @objc public func open(url: Foundation.URL) -> Swift.Bool
-  @objc public func supportedInterfaceOrientationsFor(window: UIKit.UIWindow?) -> UIKit.UIInterfaceOrientationMask
-  @objc public var currentLoginToken: Swift.String? {
-    @objc get
-  }
-  @objc(purchaseWithPaystationToken:isSandbox:) public func purchase(withPaystationToken token: Swift.String, isSandbox: Swift.Bool)
-  @objc(purchaseWithTokenPayment:) public func purchase(with payment: XsollaMobileSDK.TokenPayment)
-  @objc(purchaseWithSKU:) public func purchase(withSKU sku: Swift.String) -> Swift.Bool
   @objc deinit
 }
 extension XsollaMobileSDK.SKPaymentPlatform : Swift.Equatable {}

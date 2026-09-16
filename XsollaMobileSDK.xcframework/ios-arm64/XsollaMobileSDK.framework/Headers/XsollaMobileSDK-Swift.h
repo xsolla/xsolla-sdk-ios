@@ -499,7 +499,8 @@ SWIFT_CLASS_NAMED("SKPayment")
 /// This is a unique string that identifies the product being purchased.
 @property (nonatomic, readonly, copy) NSString * _Nonnull productIdentifier;
 /// The quantity of the product to purchase.
-/// Always returns 1 in the current implementation.
+/// A payment the app creates always covers a single unit. On a restored purchase this is the number of
+/// units the player holds, which the SDK fills in from the restoration backend.
 @property (nonatomic, readonly) NSInteger quantity;
 /// Additional request data for the payment.
 /// Returns nil in the current implementation.
@@ -783,6 +784,10 @@ SWIFT_CLASS("_TtC15XsollaMobileSDK17SKPaymentSettings")
 /// Language and country based on locale.
 /// Provides a convenient way to set both language and country codes.
 @property (nonatomic, copy) NSLocale * _Nullable locale;
+/// Use Safari View Controller instead of the WKWebKit.
+/// Controls which web view implementation is used.
+/// SPI-only for now (not part of the public API); import with <code>@_spi(InternalApi)</code> to set it.
+@property (nonatomic) BOOL useSafariViewController;
 /// Opens paystation out of the app in Safari or other system browser.
 /// If true, the payment UI will open in an external browser.
 @property (nonatomic) BOOL openExternalBrowser;
@@ -893,9 +898,16 @@ SWIFT_CLASS_NAMED("SKPaymentTransaction")
 /// The unique identifier for the transaction.
 /// Used to track the transaction in the payment system.
 @property (nonatomic, readonly, copy) NSString * _Nullable transactionIdentifier;
-/// The date when the transaction occurred.
+/// The date the transaction became a purchase: when the payment completed, or, on a restored purchase,
+/// when restoration delivered it, as in StoreKit. The date the player actually paid for a restored
+/// purchase is on <code>original</code>. Nil until the transaction reaches <code>purchased</code>.
 @property (nonatomic, readonly, copy) NSDate * _Nullable transactionDate;
 /// The original transaction, if this transaction is a restore or renewal.
+/// Restoration sets this on every transaction it re-delivers, so <code>original != nil</code> is how you tell a
+/// replay from a purchase the app just made. It carries the identifiers of the same Xsolla order and, on
+/// an Events API restore, the date the player actually paid — the restore’s own <code>transactionDate</code> is when
+/// it was delivered. A restore from the player’s inventory reports no date and no identifiers, since the
+/// inventory records no purchase history.
 @property (nonatomic, readonly, strong) SKXPaymentTransaction * _Nullable originalTransaction;
 /// Any error that occurred during the transaction.
 @property (nonatomic, readonly) NSError * _Nullable error;
