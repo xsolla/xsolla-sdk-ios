@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.12.0] - 2026-09-23
+
+### Changed
+
+- A failed purchase now reports the HTTP status, error code and message from the Xsolla response in `SKPaymentTransaction.error`, under the keys in `SKXErrorUserInfoKeys`. Its code is `.clientInvalid` when the login token was rejected and `.paymentInvalid` when the order was, instead of `.unknown` for every failure.
+- A failed product request now reports an `SKXError` carrying the same codes and detail, instead of the internal error behind it, which is now under `NSUnderlyingErrorKey`.
+
+### Fixed
+
+- A restored purchase now consumes every unit it covers, instead of a single unit.
+- Finishing a transaction that hasn't resolved no longer removes it from the queue.
+- The error that caused a transaction to fail is now reported under `NSUnderlyingErrorKey`. It was previously dropped.
+
 ## [3.11.0] - 2026-09-16
 
 ### Changed

@@ -1165,6 +1165,39 @@ SWIFT_CLASS("_TtC15XsollaMobileSDK8SKXError")
 - (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
 @end
 
+/// Keys under which a failed transaction’s error carries the detail of the Xsolla API response that
+/// caused the failure.
+/// Read them off <code>SKPaymentTransaction.error</code>’s <code>userInfo</code>. They are present only when the failure
+/// came from an API response — a cancellation or a lost connection carries none of them, so treat
+/// every key as optional. The two codes are <code>NSNumber</code>, the message is <code>String</code>.
+SWIFT_CLASS_NAMED("SKXErrorUserInfoKeys")
+@interface SKXErrorUserInfoKeys : NSObject
+/// HTTP status of the failed response, e.g. <code>422</code>.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull httpStatusCode;)
++ (NSString * _Nonnull)httpStatusCode SWIFT_WARN_UNUSED_RESULT;
+/// Xsolla’s own error code from the response body, which identifies the failure far more
+/// narrowly than the HTTP status does.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull backendErrorCode;)
++ (NSString * _Nonnull)backendErrorCode SWIFT_WARN_UNUSED_RESULT;
+/// The error message from the response body.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull backendErrorMessage;)
++ (NSString * _Nonnull)backendErrorMessage SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Where the SDK’s log lines can be sent, in addition to the device log.
+/// SPI-only (not part of the public API); it exists for the Unity bridge, which installs a handler
+/// through the ObjC runtime. Import with <code>@_spi(InternalApi)</code> to use it from Swift.
+SWIFT_CLASS_NAMED("SKXLogging")
+@interface SKXLogging : NSObject
+/// Installs a handler for the SDK’s log lines, replacing any previous one; <code>nil</code> stops them.
+/// It is called for each line that passes <code>SKPaymentSettings/logLevel</code>, on whichever thread
+/// logged it, so it must be safe to call from any thread and must not block. Installing one
+/// doesn’t stop the SDK logging to <code>os_log</code>.
++ (void)setHandler:(void (^ _Nullable)(enum SKLogLevel, NSString * _Nonnull))handler;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 /// Represents a restoration error in the Xsolla Mobile SDK.
 /// This class extends NSError to provide specific restoration error codes and information.
 SWIFT_CLASS("_TtC15XsollaMobileSDK19SKXRestorationError")
@@ -2403,6 +2436,39 @@ SWIFT_CLASS("_TtC15XsollaMobileSDK8SKXError")
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @property (nonatomic, readonly, copy) NSString * _Nonnull localizedDescription;
 - (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
+@end
+
+/// Keys under which a failed transaction’s error carries the detail of the Xsolla API response that
+/// caused the failure.
+/// Read them off <code>SKPaymentTransaction.error</code>’s <code>userInfo</code>. They are present only when the failure
+/// came from an API response — a cancellation or a lost connection carries none of them, so treat
+/// every key as optional. The two codes are <code>NSNumber</code>, the message is <code>String</code>.
+SWIFT_CLASS_NAMED("SKXErrorUserInfoKeys")
+@interface SKXErrorUserInfoKeys : NSObject
+/// HTTP status of the failed response, e.g. <code>422</code>.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull httpStatusCode;)
++ (NSString * _Nonnull)httpStatusCode SWIFT_WARN_UNUSED_RESULT;
+/// Xsolla’s own error code from the response body, which identifies the failure far more
+/// narrowly than the HTTP status does.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull backendErrorCode;)
++ (NSString * _Nonnull)backendErrorCode SWIFT_WARN_UNUSED_RESULT;
+/// The error message from the response body.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull backendErrorMessage;)
++ (NSString * _Nonnull)backendErrorMessage SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Where the SDK’s log lines can be sent, in addition to the device log.
+/// SPI-only (not part of the public API); it exists for the Unity bridge, which installs a handler
+/// through the ObjC runtime. Import with <code>@_spi(InternalApi)</code> to use it from Swift.
+SWIFT_CLASS_NAMED("SKXLogging")
+@interface SKXLogging : NSObject
+/// Installs a handler for the SDK’s log lines, replacing any previous one; <code>nil</code> stops them.
+/// It is called for each line that passes <code>SKPaymentSettings/logLevel</code>, on whichever thread
+/// logged it, so it must be safe to call from any thread and must not block. Installing one
+/// doesn’t stop the SDK logging to <code>os_log</code>.
++ (void)setHandler:(void (^ _Nullable)(enum SKLogLevel, NSString * _Nonnull))handler;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Represents a restoration error in the Xsolla Mobile SDK.
