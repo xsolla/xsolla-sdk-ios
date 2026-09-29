@@ -14,70 +14,6 @@ import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@_hasMissingDesignatedInitializers @objc(SKXPaymentTransaction) @objcMembers public class SKPaymentTransaction : ObjectiveC.NSObject {
-  @objc public var payment: XsollaMobileSDK.SKPayment {
-    get
-  }
-  @objc public var transactionIdentifier: Swift.String? {
-    get
-  }
-  @objc public var transactionDate: Foundation.Date? {
-    get
-  }
-  @objc(originalTransaction) public var original: XsollaMobileSDK.SKPaymentTransaction? {
-    get
-  }
-  @objc public var error: (any Swift.Error)? {
-    get
-  }
-  @objc public var transactionReceipt: Foundation.Data? {
-    @objc get
-  }
-  @objc public var transactionState: XsollaMobileSDK.SKPaymentTransactionState {
-    get
-  }
-  @objc public var invoiceIdentifier: Swift.String? {
-    get
-  }
-  @objc public var userIdentifier: Swift.String? {
-    get
-  }
-  @objc public func cancel() -> Swift.Bool
-  @objc deinit
-}
-public struct JwtPayload : Swift.Codable {
-  public let iss: Swift.String
-  public let sub: Swift.String
-  public let aud: [Swift.String]
-  public let exp: Swift.Int64
-  public let iat: Swift.Int64
-  public let jti: Swift.String
-  public let publisherId: Swift.Int?
-  public let clientId: Swift.Int?
-  public let scope: Swift.String?
-  public let scp: [Swift.String]?
-  public let xsollaLoginAccessKey: Swift.String?
-  public let xsollaLoginProjectId: Swift.String?
-  public let isMaster: Swift.Bool?
-  public let isNew: Swift.Bool?
-  public let id: Swift.String?
-  public let provider: Swift.String?
-  public let socialAccessToken: Swift.String?
-  public let socialRefreshToken: Swift.String?
-  public let type: Swift.String?
-  public var socialAccessTokenPayload: XsollaMobileSDK.JwtPayload? {
-    get
-  }
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-@objc(SKXPaymentTransactionObserver) public protocol SKPaymentTransactionObserver {
-  @objc optional func paymentQueue(_: XsollaMobileSDK.SKPaymentQueue, updatedTransactions: [XsollaMobileSDK.SKPaymentTransaction])
-  @objc optional func paymentQueue(_: XsollaMobileSDK.SKPaymentQueue, removedTransactions: [XsollaMobileSDK.SKPaymentTransaction])
-  @objc optional func paymentQueueDidChangeStorefront(_: XsollaMobileSDK.SKPaymentQueue)
-  @objc optional func paymentQueue(_ queue: XsollaMobileSDK.SKPaymentQueue, event: XsollaMobileSDK.SKPaymentTransactionPaystationEvent, for transaction: XsollaMobileSDK.SKPaymentTransaction)
-  @objc optional func paymentQueueDidLogin(_ queue: XsollaMobileSDK.SKPaymentQueue)
-}
 @objc @_hasMissingDesignatedInitializers public class SKXRestorationError : Foundation.NSError, @unchecked Swift.Sendable {
   public var errorCode: XsollaMobileSDK.SKRestorationError {
     get
@@ -167,6 +103,31 @@ public struct JwtPayload : Swift.Codable {
   @objc public var discounts: [XsollaMobileSDK.SKProductDiscount] {
     get
   }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(XMLoginManager) @objcMembers public class LoginManager : ObjectiveC.NSObject {
+  @objc public static var shared: XsollaMobileSDK.LoginManager
+  @objc(authWithXsollaWidgetWithSettings:completion:) public func authWithXsollaWidget(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @objc(authWithXsollaAccountWithSettings:completion:) public func authWithXsollaAccount(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(iOS 13.0, *)
+  public func loadWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings) async throws -> XsollaMobileSDK.AccessTokenInfo
+  @objc @available(iOS 13.0, *)
+  public func loadWidgetUserInfo(_ settings: XsollaMobileSDK.SKPaymentSettings) async throws
+  public func loadWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
+  public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.AccessTokenInfo, _ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
+  public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.AccessTokenInfo, _ settings: XsollaMobileSDK.SKPaymentSettings, forceRefresh: Swift.Bool, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
+  public func loadWidgetUserInfo(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc public func loadWidgetAuthTokenWithSettings(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.XMAccessTokenInfo, settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc public func loadWidgetUserInfoWithSettings(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @objc(clearWidgetAuthTokenWithSettings:) public func clearWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings)
+  public func authWithSocialProvider(_ settings: XsollaMobileSDK.SKPaymentSettings, provider: XsollaMobileSDK.SocialNetworkProvider, socialAccessToken: Swift.String, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
+  @available(swift, obsoleted: 1.0, message: "Use authWithSocialProvider in Swift.")
+  @objc(authWithSocialProviderWithSettings:provider:socialAccessToken:completion:) public func authWithSocialProvider(_ settings: XsollaMobileSDK.SKPaymentSettings, provider: XsollaMobileSDK.XMSocialNetworkProvider, socialAccessToken: Swift.String, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @objc override dynamic public init()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(SKXProductDiscount) @objcMembers public class SKProductDiscount : ObjectiveC.NSObject {
@@ -290,15 +251,6 @@ public struct AccessTokenInfo : Swift.Codable {
   @objc(initWithPaystationToken:isSandbox:) convenience public init(paystationToken: Swift.String, isSandbox: Swift.Bool)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @objc(SKXProductsResponse) @objcMembers public class SKProductsResponse : ObjectiveC.NSObject {
-  @objc public var products: [XsollaMobileSDK.SKProduct] {
-    get
-  }
-  @objc public var invalidProductIdentifiers: [Swift.String] {
-    get
-  }
-  @objc deinit
-}
 public enum SocialNetworkProvider : Swift.String {
   case xsolla
   case epicgames
@@ -316,6 +268,15 @@ public enum SocialNetworkProvider : Swift.String {
   public var rawValue: Swift.Int {
     get
   }
+}
+@_hasMissingDesignatedInitializers @objc(SKXProductsResponse) @objcMembers public class SKProductsResponse : ObjectiveC.NSObject {
+  @objc public var products: [XsollaMobileSDK.SKProduct] {
+    get
+  }
+  @objc public var invalidProductIdentifiers: [Swift.String] {
+    get
+  }
+  @objc deinit
 }
 @objc(SKXPayment) @objcMembers public class SKPayment : ObjectiveC.NSObject {
   @objc public var productIdentifier: Swift.String {
@@ -418,31 +379,6 @@ public enum SocialNetworkProvider : Swift.String {
   @objc optional func requestDidFinish(_ request: XsollaMobileSDK.SKRequest)
   @objc optional func request(_ request: XsollaMobileSDK.SKRequest, didFailWithError error: any Swift.Error)
 }
-@_inheritsConvenienceInitializers @objc(XMLoginManager) @objcMembers public class LoginManager : ObjectiveC.NSObject {
-  @objc public static var shared: XsollaMobileSDK.LoginManager
-  @objc(authWithXsollaWidgetWithSettings:completion:) public func authWithXsollaWidget(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @objc(authWithXsollaAccountWithSettings:completion:) public func authWithXsollaAccount(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @available(iOS 13.0, *)
-  public func loadWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings) async throws -> XsollaMobileSDK.AccessTokenInfo
-  @objc @available(iOS 13.0, *)
-  public func loadWidgetUserInfo(_ settings: XsollaMobileSDK.SKPaymentSettings) async throws
-  public func loadWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
-  public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.AccessTokenInfo, _ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
-  public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.AccessTokenInfo, _ settings: XsollaMobileSDK.SKPaymentSettings, forceRefresh: Swift.Bool, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
-  public func loadWidgetUserInfo(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
-  @available(swift, obsoleted: 1.0)
-  @objc public func loadWidgetAuthTokenWithSettings(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @available(swift, obsoleted: 1.0)
-  @objc public func refreshWidgetAuthToken(_ token: XsollaMobileSDK.XMAccessTokenInfo, settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @available(swift, obsoleted: 1.0)
-  @objc public func loadWidgetUserInfoWithSettings(_ settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @objc(clearWidgetAuthTokenWithSettings:) public func clearWidgetAuthToken(_ settings: XsollaMobileSDK.SKPaymentSettings)
-  public func authWithSocialProvider(_ settings: XsollaMobileSDK.SKPaymentSettings, provider: XsollaMobileSDK.SocialNetworkProvider, socialAccessToken: Swift.String, completion: @escaping (Swift.Result<XsollaMobileSDK.AccessTokenInfo, any Swift.Error>) -> Swift.Void)
-  @available(swift, obsoleted: 1.0, message: "Use authWithSocialProvider in Swift.")
-  @objc(authWithSocialProviderWithSettings:provider:socialAccessToken:completion:) public func authWithSocialProvider(_ settings: XsollaMobileSDK.SKPaymentSettings, provider: XsollaMobileSDK.XMSocialNetworkProvider, socialAccessToken: Swift.String, completion: @escaping (_ token: XsollaMobileSDK.XMAccessTokenInfo?, _ error: (any Swift.Error)?) -> Swift.Void)
-  @objc override dynamic public init()
-  @objc deinit
-}
 @objc public enum SKPaymentPlatform : Swift.Int, Swift.RawRepresentable {
   case appStore
   case standalone
@@ -519,6 +455,7 @@ public enum SocialNetworkProvider : Swift.String {
   }
   @objc public var fetchPersonalizedProducts: Swift.Bool
   @objc public var customUserId: Swift.String?
+  @objc public var attributionUserId: Swift.String?
   @objc public var trackingId: Swift.String?
   public var paymentMethod: Swift.Int?
   @objc public var paymentMethodId: Foundation.NSNumber? {
@@ -577,6 +514,70 @@ public enum SocialNetworkProvider : Swift.String {
   @objc(setSocialProviderTokenWithProvider:accessToken:) public func setSocialProviderToken(provider: XsollaMobileSDK.XMSocialNetworkProvider, accessToken: Swift.String)
   @objc deinit
 }
+@_hasMissingDesignatedInitializers @objc(SKXPaymentTransaction) @objcMembers public class SKPaymentTransaction : ObjectiveC.NSObject {
+  @objc public var payment: XsollaMobileSDK.SKPayment {
+    get
+  }
+  @objc public var transactionIdentifier: Swift.String? {
+    get
+  }
+  @objc public var transactionDate: Foundation.Date? {
+    get
+  }
+  @objc(originalTransaction) public var original: XsollaMobileSDK.SKPaymentTransaction? {
+    get
+  }
+  @objc public var error: (any Swift.Error)? {
+    get
+  }
+  @objc public var transactionReceipt: Foundation.Data? {
+    @objc get
+  }
+  @objc public var transactionState: XsollaMobileSDK.SKPaymentTransactionState {
+    get
+  }
+  @objc public var invoiceIdentifier: Swift.String? {
+    get
+  }
+  @objc public var userIdentifier: Swift.String? {
+    get
+  }
+  @objc public func cancel() -> Swift.Bool
+  @objc deinit
+}
+public struct JwtPayload : Swift.Codable {
+  public let iss: Swift.String
+  public let sub: Swift.String
+  public let aud: [Swift.String]
+  public let exp: Swift.Int64
+  public let iat: Swift.Int64
+  public let jti: Swift.String
+  public let publisherId: Swift.Int?
+  public let clientId: Swift.Int?
+  public let scope: Swift.String?
+  public let scp: [Swift.String]?
+  public let xsollaLoginAccessKey: Swift.String?
+  public let xsollaLoginProjectId: Swift.String?
+  public let isMaster: Swift.Bool?
+  public let isNew: Swift.Bool?
+  public let id: Swift.String?
+  public let provider: Swift.String?
+  public let socialAccessToken: Swift.String?
+  public let socialRefreshToken: Swift.String?
+  public let type: Swift.String?
+  public var socialAccessTokenPayload: XsollaMobileSDK.JwtPayload? {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc(SKXPaymentTransactionObserver) public protocol SKPaymentTransactionObserver {
+  @objc optional func paymentQueue(_: XsollaMobileSDK.SKPaymentQueue, updatedTransactions: [XsollaMobileSDK.SKPaymentTransaction])
+  @objc optional func paymentQueue(_: XsollaMobileSDK.SKPaymentQueue, removedTransactions: [XsollaMobileSDK.SKPaymentTransaction])
+  @objc optional func paymentQueueDidChangeStorefront(_: XsollaMobileSDK.SKPaymentQueue)
+  @objc optional func paymentQueue(_ queue: XsollaMobileSDK.SKPaymentQueue, event: XsollaMobileSDK.SKPaymentTransactionPaystationEvent, for transaction: XsollaMobileSDK.SKPaymentTransaction)
+  @objc optional func paymentQueueDidLogin(_ queue: XsollaMobileSDK.SKPaymentQueue)
+}
 extension XsollaMobileSDK.SKRestorationError : Swift.Equatable {}
 extension XsollaMobileSDK.SKRestorationError : Swift.Hashable {}
 extension XsollaMobileSDK.SKRestorationError : Swift.RawRepresentable {}
@@ -586,15 +587,15 @@ extension XsollaMobileSDK.SKPaymentTransactionPaystationEvent : Swift.RawReprese
 extension XsollaMobileSDK.SKPaymentTransactionState : Swift.Equatable {}
 extension XsollaMobileSDK.SKPaymentTransactionState : Swift.Hashable {}
 extension XsollaMobileSDK.SKPaymentTransactionState : Swift.RawRepresentable {}
+extension XsollaMobileSDK.SKLogLevel : Swift.Equatable {}
+extension XsollaMobileSDK.SKLogLevel : Swift.Hashable {}
+extension XsollaMobileSDK.SKLogLevel : Swift.RawRepresentable {}
 extension XsollaMobileSDK.SKProductDiscount.PaymentMode : Swift.Equatable {}
 extension XsollaMobileSDK.SKProductDiscount.PaymentMode : Swift.Hashable {}
 extension XsollaMobileSDK.SKProductDiscount.PaymentMode : Swift.RawRepresentable {}
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.Equatable {}
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.Hashable {}
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.RawRepresentable {}
-extension XsollaMobileSDK.SKLogLevel : Swift.Equatable {}
-extension XsollaMobileSDK.SKLogLevel : Swift.Hashable {}
-extension XsollaMobileSDK.SKLogLevel : Swift.RawRepresentable {}
 extension XsollaMobileSDK.SKError : Swift.Equatable {}
 extension XsollaMobileSDK.SKError : Swift.Hashable {}
 extension XsollaMobileSDK.SKError : Swift.RawRepresentable {}

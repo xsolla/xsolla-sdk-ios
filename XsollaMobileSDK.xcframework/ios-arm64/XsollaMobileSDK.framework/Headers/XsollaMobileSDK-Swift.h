@@ -766,9 +766,15 @@ SWIFT_CLASS("_TtC15XsollaMobileSDK17SKPaymentSettings")
 @property (nonatomic, copy) NSString * _Nullable customLoginToken;
 /// Whether to use login token when fetching products, to apply personalization.
 @property (nonatomic) BOOL fetchPersonalizedProducts;
-/// Provide custom user id to login with.
-/// If set, this user ID will be used for authentication.
+/// Your own identifier for the player, sent to Pay Station as <code>custom_parameters.custom_user_id</code>
+/// and returned to you in the webhooks for the purchase. It plays no part in authentication, and
+/// attribution platforms are not keyed on it: for that, see <code>attributionUserId</code>.
 @property (nonatomic, copy) NSString * _Nullable customUserId;
+/// The identifier purchase events reported to attribution platforms are keyed on, sent to Pay
+/// Station as <code>custom_parameters.custom_id</code>.
+/// It must equal the customer user id your attribution SDK (AppsFlyer, etc.) reports, or the
+/// events will not match up. Leave it unset to keep the default key, the player’s Xsolla Login id.
+@property (nonatomic, copy) NSString * _Nullable attributionUserId;
 /// Provide a custom tracking identifier that will be passed to payments.
 @property (nonatomic, copy) NSString * _Nullable trackingId;
 /// Payment method ID. It determines the display of currency in the payment interface, as some payment methods may only support certain currencies.

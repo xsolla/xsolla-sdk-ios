@@ -14,77 +14,6 @@ import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@objc @_hasMissingDesignatedInitializers public class SKXError : Foundation.NSError, @unchecked Swift.Sendable {
-  public var errorCode: XsollaMobileSDK.SKError {
-    get
-  }
-  required public init(code: XsollaMobileSDK.SKError, userInfo dict: [Swift.String : Any]? = nil)
-  @objc override dynamic public var description: Swift.String {
-    @objc get
-  }
-  @objc override dynamic public var localizedDescription: Swift.String {
-    @objc get
-  }
-  @objc deinit
-}
-@objc public enum SKError : Swift.Int {
-  case unknown = 0
-  case clientInvalid = 1
-  case paymentCancelled = 2
-  case paymentInvalid = 3
-  case aborted = 1000
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc(SKXProductsRequest) @objcMembers public class SKProductsRequest : XsollaMobileSDK.SKRequest {
-  @objc weak public var delegate: (any XsollaMobileSDK.SKProductsRequestDelegate)?
-  @objc(initWithProductIdentifiers:) public init(productIdentifiers: Swift.Set<Swift.String>)
-  @objc override public func start()
-  @objc override public func cancel()
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc(SKXErrorUserInfoKeys) final public class SKXErrorUserInfoKeys : ObjectiveC.NSObject {
-  @objc public static let httpStatusCode: Swift.String
-  @objc public static let backendErrorCode: Swift.String
-  @objc public static let backendErrorMessage: Swift.String
-  @objc override dynamic public init()
-  @objc deinit
-}
-public struct AccessTokenInfo : Swift.Codable {
-  public let accessToken: Swift.String
-  public let expiresIn: Foundation.Date?
-  public let refreshToken: Swift.String?
-  public let tokenType: Swift.String
-  public var payload: XsollaMobileSDK.JwtPayload? {
-    get
-  }
-  public init(from token: XsollaMobileSDK.XMAccessTokenInfo)
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-@_hasMissingDesignatedInitializers @objc @objcMembers public class XMAccessTokenInfo : ObjectiveC.NSObject {
-  @objc final public let accessToken: Swift.String
-  @objc final public let expiresIn: Foundation.Date?
-  @objc final public let refreshToken: Swift.String?
-  @objc final public let tokenType: Swift.String
-  @objc public init(accessToken: Swift.String, expiresIn: Foundation.Date? = nil, refreshToken: Swift.String? = nil, tokenType: Swift.String)
-  @objc public func toJsonString() -> Swift.String?
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc(XMRetryPolicies) @objcMembers public class RetryPolicies : ObjectiveC.NSObject {
-  @objc public var defaultRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var pendingOrderStatusQueryRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var createOrderRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var authenticateRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var queryProductsRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var queryPurchasesRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc public var consumePurchasesRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
-  @objc override dynamic public init()
-  @objc deinit
-}
 @objc(SKXProductsRequestDelegate) public protocol SKProductsRequestDelegate : XsollaMobileSDK.SKRequestDelegate {
   @objc(productsRequest:didReceiveResponse:) func productsRequest(_ request: XsollaMobileSDK.SKProductsRequest, didReceive response: XsollaMobileSDK.SKProductsResponse)
 }
@@ -107,31 +36,6 @@ public struct AccessTokenInfo : Swift.Codable {
   @objc deinit
 }
 @_spi(InternalApi) public typealias PaystationViewController = UIKit.UIViewController & XsollaMobileSDK.PaystationHandler
-@objc(XMRetryPolicyType) public enum RetryPolicyType : Swift.Int {
-  case uniform
-  case exponentialBackoff
-  public var stringValue: Swift.String {
-    get
-  }
-  public init?(string: Swift.String)
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc(XMRetryPolicy) @objcMembers public class RetryPolicy : ObjectiveC.NSObject {
-  @objc final public let type: XsollaMobileSDK.RetryPolicyType
-  @objc final public let maxNumAttempts: Swift.Int
-  final public let intervalMillis: Swift.Int?
-  final public let baseIntervalMillis: Swift.Int?
-  final public let maxIntervalMillis: Swift.Int?
-  final public let maxRandomExtraDelayMillis: Swift.Int?
-  @objc public init(uniform maxNumAttempts: Swift.Int, intervalMillis: Swift.Int)
-  public init(exponentialBackoff maxNumAttempts: Swift.Int, baseIntervalMillis: Swift.Int, maxIntervalMillis: Swift.Int? = nil, maxRandomExtraDelayMillis: Swift.Int? = nil)
-  @objc convenience public init(exponentialBackoff maxNumAttempts: Swift.Int, baseIntervalMillis: Swift.Int, maxIntervalMillis: Foundation.NSNumber? = nil, maxRandomExtraDelayMillis: Foundation.NSNumber? = nil)
-  @objc deinit
-}
 @_hasMissingDesignatedInitializers @objc(SKXProductsResponse) @objcMembers public class SKProductsResponse : ObjectiveC.NSObject {
   @objc public var products: [XsollaMobileSDK.SKProduct] {
     get
@@ -207,32 +111,6 @@ public struct AccessTokenInfo : Swift.Codable {
   @objc(purchaseWithTokenPayment:) public func purchase(with payment: XsollaMobileSDK.TokenPayment)
   @objc(purchaseWithSKU:) public func purchase(withSKU sku: Swift.String) -> Swift.Bool
   @objc deinit
-}
-public struct JwtPayload : Swift.Codable {
-  public let iss: Swift.String
-  public let sub: Swift.String
-  public let aud: [Swift.String]
-  public let exp: Swift.Int64
-  public let iat: Swift.Int64
-  public let jti: Swift.String
-  public let publisherId: Swift.Int?
-  public let clientId: Swift.Int?
-  public let scope: Swift.String?
-  public let scp: [Swift.String]?
-  public let xsollaLoginAccessKey: Swift.String?
-  public let xsollaLoginProjectId: Swift.String?
-  public let isMaster: Swift.Bool?
-  public let isNew: Swift.Bool?
-  public let id: Swift.String?
-  public let provider: Swift.String?
-  public let socialAccessToken: Swift.String?
-  public let socialRefreshToken: Swift.String?
-  public let type: Swift.String?
-  public var socialAccessTokenPayload: XsollaMobileSDK.JwtPayload? {
-    get
-  }
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
 }
 @objc(SKXRequestDelegate) public protocol SKRequestDelegate {
   @objc optional func requestDidFinish(_ request: XsollaMobileSDK.SKRequest)
@@ -314,6 +192,7 @@ public struct JwtPayload : Swift.Codable {
   }
   @objc public var fetchPersonalizedProducts: Swift.Bool
   @objc public var customUserId: Swift.String?
+  @objc public var attributionUserId: Swift.String?
   @objc public var trackingId: Swift.String?
   public var paymentMethod: Swift.Int?
   @objc public var paymentMethodId: Foundation.NSNumber? {
@@ -373,6 +252,17 @@ public struct JwtPayload : Swift.Codable {
   @objc(setSocialProviderTokenWithProvider:accessToken:) public func setSocialProviderToken(provider: XsollaMobileSDK.XMSocialNetworkProvider, accessToken: Swift.String)
   @objc deinit
 }
+@_inheritsConvenienceInitializers @objc(XMRetryPolicies) @objcMembers public class RetryPolicies : ObjectiveC.NSObject {
+  @objc public var defaultRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var pendingOrderStatusQueryRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var createOrderRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var authenticateRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var queryProductsRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var queryPurchasesRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc public var consumePurchasesRetryProfileOverride: XsollaMobileSDK.RetryPolicy?
+  @objc override dynamic public init()
+  @objc deinit
+}
 public enum SocialNetworkProvider : Swift.String {
   case xsolla
   case epicgames
@@ -422,9 +312,30 @@ public enum SocialNetworkProvider : Swift.String {
   @objc public func cancel() -> Swift.Bool
   @objc deinit
 }
-@_spi(InternalApi) public protocol PaystationHandler : AnyObject {
-  @_spi(InternalApi) var paystationOrientation: UIKit.UIInterfaceOrientationMask { get set }
-  @_spi(InternalApi) func cancelPayment()
+@objc(XMRetryPolicyType) public enum RetryPolicyType : Swift.Int {
+  case uniform
+  case exponentialBackoff
+  public var stringValue: Swift.String {
+    get
+  }
+  public init?(string: Swift.String)
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(XMRetryPolicy) @objcMembers public class RetryPolicy : ObjectiveC.NSObject {
+  @objc final public let type: XsollaMobileSDK.RetryPolicyType
+  @objc final public let maxNumAttempts: Swift.Int
+  final public let intervalMillis: Swift.Int?
+  final public let baseIntervalMillis: Swift.Int?
+  final public let maxIntervalMillis: Swift.Int?
+  final public let maxRandomExtraDelayMillis: Swift.Int?
+  @objc public init(uniform maxNumAttempts: Swift.Int, intervalMillis: Swift.Int)
+  public init(exponentialBackoff maxNumAttempts: Swift.Int, baseIntervalMillis: Swift.Int, maxIntervalMillis: Swift.Int? = nil, maxRandomExtraDelayMillis: Swift.Int? = nil)
+  @objc convenience public init(exponentialBackoff maxNumAttempts: Swift.Int, baseIntervalMillis: Swift.Int, maxIntervalMillis: Foundation.NSNumber? = nil, maxRandomExtraDelayMillis: Foundation.NSNumber? = nil)
+  @objc deinit
 }
 @objc(SKXPaymentTransactionObserver) public protocol SKPaymentTransactionObserver {
   @objc optional func paymentQueue(_: XsollaMobileSDK.SKPaymentQueue, updatedTransactions: [XsollaMobileSDK.SKPaymentTransaction])
@@ -457,28 +368,6 @@ public enum SocialNetworkProvider : Swift.String {
   public var rawValue: Swift.Int {
     get
   }
-}
-@_spi(InternalApi) public class Presenter {
-  @_spi(InternalApi) public var containerWindow: XsollaMobileSDK.ContainerWindow? {
-    get
-  }
-  @_spi(InternalApi) public var presentedViewController: UIKit.UIViewController? {
-    get
-  }
-  @_spi(InternalApi) public var forceOrientationsWithContainerWindow: Swift.Bool {
-    get
-  }
-  @_spi(InternalApi) public static var shared: XsollaMobileSDK.Presenter
-  @_spi(InternalApi) public init()
-  @_spi(InternalApi) public static func rootVC(from settings: XsollaMobileSDK.PresenterSettings) -> UIKit.UIViewController?
-  @_spi(InternalApi) public static func topPresentedViewController(from vc: UIKit.UIViewController) -> UIKit.UIViewController
-  @_spi(InternalApi) public func reset()
-  @_spi(InternalApi) public func dismissVC(completion: @escaping () -> Swift.Void)
-  @_spi(InternalApi) public func presentVC(_ viewController: any UIKit.UIViewController & XsollaMobileSDK.PaystationHandler, settings: XsollaMobileSDK.SKPaymentSettings, completion: (() -> Swift.Void)? = nil)
-  @_spi(InternalApi) public func presentVC(_ viewController: any UIKit.UIViewController & XsollaMobileSDK.PaystationHandler, settings: XsollaMobileSDK.PresenterSettings, completion: (() -> Swift.Void)? = nil)
-  @_spi(InternalApi) public func presentContainerIfNeeded(settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping () -> Swift.Void)
-  @_spi(InternalApi) public func presentContainerIfNeeded(settings: XsollaMobileSDK.PresenterSettings, completion: @escaping () -> Swift.Void)
-  @_spi(InternalApi) @objc deinit
 }
 @_inheritsConvenienceInitializers @objc(XMLoginManager) @objcMembers public class LoginManager : ObjectiveC.NSObject {
   @objc public static var shared: XsollaMobileSDK.LoginManager
@@ -519,16 +408,31 @@ public enum SocialNetworkProvider : Swift.String {
     get
   }
 }
-@_spi(InternalApi) public struct PresenterSettings {
-  @_spi(InternalApi) public var rootViewController: UIKit.UIViewController?
-  @_spi(InternalApi) public var orientation: UIKit.UIInterfaceOrientationMask
-  @_spi(InternalApi) public var showAsPopover: Swift.Bool
-  @_spi(InternalApi) public var skipOrientationForPad: Swift.Bool
-  @_spi(InternalApi) public var presentationForPad: UIKit.UIModalPresentationStyle
-  @_spi(InternalApi) public var allowUsingContainerController: Swift.Bool
-  @_spi(InternalApi) public var forceOrientationsWithContainerWindow: Swift.Bool
-  @_spi(InternalApi) public init(from settings: XsollaMobileSDK.SKPaymentSettings)
-  @_spi(InternalApi) public init(rootViewController: UIKit.UIViewController? = nil, orientation: UIKit.UIInterfaceOrientationMask = .portrait, showAsPopover: Swift.Bool = true, skipOrientationForPad: Swift.Bool = true, presentationForPad: UIKit.UIModalPresentationStyle = .pageSheet, allowUsingContainerController: Swift.Bool = true)
+public struct JwtPayload : Swift.Codable {
+  public let iss: Swift.String
+  public let sub: Swift.String
+  public let aud: [Swift.String]
+  public let exp: Swift.Int64
+  public let iat: Swift.Int64
+  public let jti: Swift.String
+  public let publisherId: Swift.Int?
+  public let clientId: Swift.Int?
+  public let scope: Swift.String?
+  public let scp: [Swift.String]?
+  public let xsollaLoginAccessKey: Swift.String?
+  public let xsollaLoginProjectId: Swift.String?
+  public let isMaster: Swift.Bool?
+  public let isNew: Swift.Bool?
+  public let id: Swift.String?
+  public let provider: Swift.String?
+  public let socialAccessToken: Swift.String?
+  public let socialRefreshToken: Swift.String?
+  public let type: Swift.String?
+  public var socialAccessTokenPayload: XsollaMobileSDK.JwtPayload? {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @objc public enum SKPaymentTransactionState : Swift.Int {
   case purchasing = 0
@@ -541,13 +445,6 @@ public enum SocialNetworkProvider : Swift.String {
   public var rawValue: Swift.Int {
     get
   }
-}
-@_spi(InternalApi) @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class ContainerWindow : UIKit.UIWindow {
-  @_spi(InternalApi) @available(iOS 13.0, *)
-  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(windowScene: UIKit.UIWindowScene)
-  @_spi(InternalApi) @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_spi(InternalApi) @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @_spi(InternalApi) @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class ContainerVC : UIKit.UIViewController {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
@@ -596,6 +493,17 @@ public enum SocialNetworkProvider : Swift.String {
   }
   @objc deinit
 }
+@_spi(InternalApi) @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class ContainerWindow : UIKit.UIWindow {
+  @_spi(InternalApi) @available(iOS 13.0, *)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(windowScene: UIKit.UIWindowScene)
+  @_spi(InternalApi) @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_spi(InternalApi) @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_spi(InternalApi) @objc deinit
+}
+@_spi(InternalApi) public protocol PaystationHandler : AnyObject {
+  @_spi(InternalApi) var paystationOrientation: UIKit.UIInterfaceOrientationMask { get set }
+  @_spi(InternalApi) func cancelPayment()
+}
 @_hasMissingDesignatedInitializers @objc(SKXProductDiscount) @objcMembers public class SKProductDiscount : ObjectiveC.NSObject {
   @objc public var identifier: Swift.String? {
     get
@@ -636,12 +544,99 @@ public enum SocialNetworkProvider : Swift.String {
   }
   @objc deinit
 }
-extension XsollaMobileSDK.SKError : Swift.Equatable {}
-extension XsollaMobileSDK.SKError : Swift.Hashable {}
-extension XsollaMobileSDK.SKError : Swift.RawRepresentable {}
-extension XsollaMobileSDK.RetryPolicyType : Swift.Equatable {}
-extension XsollaMobileSDK.RetryPolicyType : Swift.Hashable {}
-extension XsollaMobileSDK.RetryPolicyType : Swift.RawRepresentable {}
+@objc @_hasMissingDesignatedInitializers public class SKXError : Foundation.NSError, @unchecked Swift.Sendable {
+  public var errorCode: XsollaMobileSDK.SKError {
+    get
+  }
+  required public init(code: XsollaMobileSDK.SKError, userInfo dict: [Swift.String : Any]? = nil)
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public var localizedDescription: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public enum SKError : Swift.Int {
+  case unknown = 0
+  case clientInvalid = 1
+  case paymentCancelled = 2
+  case paymentInvalid = 3
+  case aborted = 1000
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_spi(InternalApi) public class Presenter {
+  @_spi(InternalApi) public var containerWindow: XsollaMobileSDK.ContainerWindow? {
+    get
+  }
+  @_spi(InternalApi) public var presentedViewController: UIKit.UIViewController? {
+    get
+  }
+  @_spi(InternalApi) public var forceOrientationsWithContainerWindow: Swift.Bool {
+    get
+  }
+  @_spi(InternalApi) public static var shared: XsollaMobileSDK.Presenter
+  @_spi(InternalApi) public init()
+  @_spi(InternalApi) public static func rootVC(from settings: XsollaMobileSDK.PresenterSettings) -> UIKit.UIViewController?
+  @_spi(InternalApi) public static func topPresentedViewController(from vc: UIKit.UIViewController) -> UIKit.UIViewController
+  @_spi(InternalApi) public func reset()
+  @_spi(InternalApi) public func dismissVC(completion: @escaping () -> Swift.Void)
+  @_spi(InternalApi) public func presentVC(_ viewController: any UIKit.UIViewController & XsollaMobileSDK.PaystationHandler, settings: XsollaMobileSDK.SKPaymentSettings, completion: (() -> Swift.Void)? = nil)
+  @_spi(InternalApi) public func presentVC(_ viewController: any UIKit.UIViewController & XsollaMobileSDK.PaystationHandler, settings: XsollaMobileSDK.PresenterSettings, completion: (() -> Swift.Void)? = nil)
+  @_spi(InternalApi) public func presentContainerIfNeeded(settings: XsollaMobileSDK.SKPaymentSettings, completion: @escaping () -> Swift.Void)
+  @_spi(InternalApi) public func presentContainerIfNeeded(settings: XsollaMobileSDK.PresenterSettings, completion: @escaping () -> Swift.Void)
+  @_spi(InternalApi) @objc deinit
+}
+@objc(SKXProductsRequest) @objcMembers public class SKProductsRequest : XsollaMobileSDK.SKRequest {
+  @objc weak public var delegate: (any XsollaMobileSDK.SKProductsRequestDelegate)?
+  @objc(initWithProductIdentifiers:) public init(productIdentifiers: Swift.Set<Swift.String>)
+  @objc override public func start()
+  @objc override public func cancel()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(SKXErrorUserInfoKeys) final public class SKXErrorUserInfoKeys : ObjectiveC.NSObject {
+  @objc public static let httpStatusCode: Swift.String
+  @objc public static let backendErrorCode: Swift.String
+  @objc public static let backendErrorMessage: Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct AccessTokenInfo : Swift.Codable {
+  public let accessToken: Swift.String
+  public let expiresIn: Foundation.Date?
+  public let refreshToken: Swift.String?
+  public let tokenType: Swift.String
+  public var payload: XsollaMobileSDK.JwtPayload? {
+    get
+  }
+  public init(from token: XsollaMobileSDK.XMAccessTokenInfo)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers @objc @objcMembers public class XMAccessTokenInfo : ObjectiveC.NSObject {
+  @objc final public let accessToken: Swift.String
+  @objc final public let expiresIn: Foundation.Date?
+  @objc final public let refreshToken: Swift.String?
+  @objc final public let tokenType: Swift.String
+  @objc public init(accessToken: Swift.String, expiresIn: Foundation.Date? = nil, refreshToken: Swift.String? = nil, tokenType: Swift.String)
+  @objc public func toJsonString() -> Swift.String?
+  @objc deinit
+}
+@_spi(InternalApi) public struct PresenterSettings {
+  @_spi(InternalApi) public var rootViewController: UIKit.UIViewController?
+  @_spi(InternalApi) public var orientation: UIKit.UIInterfaceOrientationMask
+  @_spi(InternalApi) public var showAsPopover: Swift.Bool
+  @_spi(InternalApi) public var skipOrientationForPad: Swift.Bool
+  @_spi(InternalApi) public var presentationForPad: UIKit.UIModalPresentationStyle
+  @_spi(InternalApi) public var allowUsingContainerController: Swift.Bool
+  @_spi(InternalApi) public var forceOrientationsWithContainerWindow: Swift.Bool
+  @_spi(InternalApi) public init(from settings: XsollaMobileSDK.SKPaymentSettings)
+  @_spi(InternalApi) public init(rootViewController: UIKit.UIViewController? = nil, orientation: UIKit.UIInterfaceOrientationMask = .portrait, showAsPopover: Swift.Bool = true, skipOrientationForPad: Swift.Bool = true, presentationForPad: UIKit.UIModalPresentationStyle = .pageSheet, allowUsingContainerController: Swift.Bool = true)
+}
 extension XsollaMobileSDK.SKLogLevel : Swift.Equatable {}
 extension XsollaMobileSDK.SKLogLevel : Swift.Hashable {}
 extension XsollaMobileSDK.SKLogLevel : Swift.RawRepresentable {}
@@ -659,6 +654,9 @@ extension XsollaMobileSDK.SocialNetworkProvider : Swift.RawRepresentable {}
 extension XsollaMobileSDK.XMSocialNetworkProvider : Swift.Equatable {}
 extension XsollaMobileSDK.XMSocialNetworkProvider : Swift.Hashable {}
 extension XsollaMobileSDK.XMSocialNetworkProvider : Swift.RawRepresentable {}
+extension XsollaMobileSDK.RetryPolicyType : Swift.Equatable {}
+extension XsollaMobileSDK.RetryPolicyType : Swift.Hashable {}
+extension XsollaMobileSDK.RetryPolicyType : Swift.RawRepresentable {}
 extension XsollaMobileSDK.SKRestorationError : Swift.Equatable {}
 extension XsollaMobileSDK.SKRestorationError : Swift.Hashable {}
 extension XsollaMobileSDK.SKRestorationError : Swift.RawRepresentable {}
@@ -674,3 +672,6 @@ extension XsollaMobileSDK.SKProductDiscount.PaymentMode : Swift.RawRepresentable
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.Equatable {}
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.Hashable {}
 extension XsollaMobileSDK.SKProductDiscount.`Type` : Swift.RawRepresentable {}
+extension XsollaMobileSDK.SKError : Swift.Equatable {}
+extension XsollaMobileSDK.SKError : Swift.Hashable {}
+extension XsollaMobileSDK.SKError : Swift.RawRepresentable {}
